@@ -135,7 +135,7 @@ export default function EncyclopediaPage() {
             <select value={potency} onChange={e => { setPotency(e.target.value); setPage(1) }}
               className="text-sm font-body rounded-xl px-3 py-3 outline-none cursor-pointer"
               style={{ background: '#f9f7f4', border: '1px solid rgba(34,160,80,0.15)', color: '#0a3d1f' }}>
-              {potencies.map(p => <option key={p}>{p} Potency</option>)}
+              {potencies.map(p => <option key={p} value={p}>{p === 'All' ? 'All Potency' : `${p} Potency`}</option>)}
             </select>
             <div className="ml-auto flex items-center gap-2">
               <span className="px-3 py-1.5 rounded-full text-xs font-body font-semibold"

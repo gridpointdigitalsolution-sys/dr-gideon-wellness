@@ -1,12 +1,23 @@
 import { Star, MapPin, Zap, Leaf } from 'lucide-react'
 import { Remedy } from '@/lib/matchRemedies'
 
+function normalisePotency(p: unknown): string {
+  if (typeof p === 'string' && ['High','Medium','Low'].includes(p)) return p
+  if (typeof p === 'number') {
+    if (p >= 4.5) return 'High'
+    if (p >= 4.2) return 'Medium'
+    return 'Low'
+  }
+  return 'Low'
+}
+
 export default function RemedyCard({ remedy }: { remedy: Remedy }) {
+  const potencyLabel = normalisePotency(remedy.potency)
   const potencyConfig = ({
-    High: { color: '#22c55e', bg: 'rgba(34,197,94,0.1)', border: 'rgba(34,197,94,0.25)' },
-    Medium: { color: '#f59e0b', bg: 'rgba(245,158,11,0.1)', border: 'rgba(245,158,11,0.25)' },
-    Low: { color: '#94a3b8', bg: 'rgba(148,163,184,0.1)', border: 'rgba(148,163,184,0.25)' },
-  } as Record<string, { color: string; bg: string; border: string }>)[remedy.potency] || { color: '#94a3b8', bg: 'rgba(148,163,184,0.1)', border: 'rgba(148,163,184,0.25)' }
+    High:   { color: '#22c55e', bg: 'rgba(34,197,94,0.1)',   border: 'rgba(34,197,94,0.25)' },
+    Medium: { color: '#f59e0b', bg: 'rgba(245,158,11,0.1)',  border: 'rgba(245,158,11,0.25)' },
+    Low:    { color: '#94a3b8', bg: 'rgba(148,163,184,0.1)', border: 'rgba(148,163,184,0.25)' },
+  } as Record<string, { color: string; bg: string; border: string }>)[potencyLabel] || { color: '#94a3b8', bg: 'rgba(148,163,184,0.1)', border: 'rgba(148,163,184,0.25)' }
 
   return (
     <div className="group relative flex flex-col h-full overflow-hidden"
@@ -24,7 +35,7 @@ export default function RemedyCard({ remedy }: { remedy: Remedy }) {
         <div className="flex items-center gap-1.5">
           <Zap className="w-3.5 h-3.5" style={{ color: potencyConfig.color }} />
           <span className="text-xs font-body font-bold uppercase tracking-wider" style={{ color: potencyConfig.color }}>
-            {remedy.potency} Potency
+            {potencyLabel} Potency
           </span>
         </div>
         <div className="flex items-center gap-1 px-2 py-0.5 rounded-full"
