@@ -98,7 +98,7 @@ export default function EncyclopediaPage() {
             <p className="font-body text-sm flex-1" style={{ color: 'rgba(187,244,210,0.9)' }}>
               Showing all remedies that help with&nbsp;
               <span className="font-bold capitalize" style={{ color: '#ffd700' }}>{ailment}</span>
-              &nbsp;— {filtered.length} result{filtered.length !== 1 ? 's' : ''} found
+              &nbsp;({filtered.length} result{filtered.length !== 1 ? 's' : ''} found)
             </p>
             <button onClick={() => { setAilment('All'); setPage(1) }}
               className="flex items-center gap-1.5 text-xs font-body px-3 py-1.5 rounded-full transition-all hover:scale-105"
@@ -160,7 +160,7 @@ export default function EncyclopediaPage() {
                 Filter by Ailment
               </span>
               <span className="text-xs font-body" style={{ color: 'rgba(100,130,110,0.7)' }}>
-                — pick a condition to see all remedies that treat it
+                Pick a condition to see all remedies that treat it
               </span>
             </div>
 

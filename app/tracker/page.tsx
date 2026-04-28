@@ -128,45 +128,44 @@ export default function HealthTrackerPage() {
               const val = values[m.key]
               const pct = val
               return (
-                <div key={m.key} className="relative overflow-hidden transition-all hover:translate-y-[-1px]"
+                <div key={m.key} className="relative overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl"
                   style={{
-                    background: 'linear-gradient(135deg, #f7f9f7 0%, #f2f6f2 100%)',
-                    border: `1px solid rgba(0,0,0,0.06)`,
+                    background: 'linear-gradient(135deg, #071c0f 0%, #0a3d1f 60%, #0f4d28 100%)',
+                    border: `1px solid ${m.color}30`,
                     borderLeft: `4px solid ${m.color}`,
                     borderRadius: 18,
                     padding: '18px 20px',
-                    boxShadow: '0 2px 16px rgba(10,61,31,0.05), 0 1px 3px rgba(0,0,0,0.04)',
+                    boxShadow: `0 8px 32px rgba(0,0,0,0.25), 0 0 0 0 ${m.color}00`,
                   }}>
-                  {/* Subtle coloured glow behind icon */}
-                  <div className="absolute top-0 right-0 w-24 h-24 rounded-full pointer-events-none"
-                    style={{ background: `radial-gradient(circle, ${m.color}12 0%, transparent 70%)`, transform: 'translate(30%,-30%)' }} />
+                  {/* Colour glow top-right */}
+                  <div className="absolute top-0 right-0 w-32 h-32 rounded-full pointer-events-none"
+                    style={{ background: `radial-gradient(circle, ${m.color}18 0%, transparent 70%)`, transform: 'translate(30%,-30%)' }} />
+                  {/* Bottom shimmer line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-px"
+                    style={{ background: `linear-gradient(90deg, transparent, ${m.color}40, transparent)` }} />
 
                   <div className="flex items-center gap-4 mb-4">
-                    {/* Icon — larger, circle with soft gradient bg */}
                     <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
                       style={{
-                        background: `linear-gradient(135deg, ${m.color}22, ${m.color}10)`,
-                        border: `1.5px solid ${m.color}30`,
-                        boxShadow: `0 4px 12px ${m.color}18`,
+                        background: `linear-gradient(135deg, ${m.color}30, ${m.color}15)`,
+                        border: `1.5px solid ${m.color}50`,
+                        boxShadow: `0 4px 16px ${m.color}30`,
                       }}>
                       <m.icon className="w-6 h-6" style={{ color: m.color }} />
                     </div>
 
                     <div className="flex-1">
                       <div className="flex items-baseline justify-between mb-1">
-                        <span className="font-body font-bold text-green-900" style={{ fontSize: 15 }}>{m.label}</span>
-                        {/* Large live number */}
+                        <span className="font-body font-bold text-white" style={{ fontSize: 15 }}>{m.label}</span>
                         <span className="font-display font-black text-3xl leading-none" style={{ color: m.color }}>{val}</span>
                       </div>
-                      {/* Thin progress track */}
-                      <div className="h-1.5 rounded-full overflow-hidden" style={{ background: `${m.color}18` }}>
+                      <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
                         <div className="h-full rounded-full transition-all duration-300"
-                          style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${m.color}70, ${m.color})` }} />
+                          style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${m.color}80, ${m.color})` }} />
                       </div>
                     </div>
                   </div>
 
-                  {/* Slider — thick, coloured, premium feel */}
                   <input type="range" min="0" max="100" value={val}
                     onChange={e => setValues(prev => ({ ...prev, [m.key]: Number(e.target.value) }))}
                     className="w-full appearance-none cursor-pointer"
@@ -175,16 +174,15 @@ export default function HealthTrackerPage() {
                       borderRadius: 99,
                       outline: 'none',
                       accentColor: m.color,
-                      background: `linear-gradient(90deg, ${m.color} 0%, ${m.color} ${pct}%, rgba(0,0,0,0.08) ${pct}%, rgba(0,0,0,0.08) 100%)`,
+                      background: `linear-gradient(90deg, ${m.color} 0%, ${m.color} ${pct}%, rgba(255,255,255,0.1) ${pct}%, rgba(255,255,255,0.1) 100%)`,
                     }}
                   />
 
-                  {/* Low / High labels as mini pills */}
                   <div className="flex justify-between mt-2.5">
                     <span className="text-xs font-body px-2 py-0.5 rounded-full"
-                      style={{ background: 'rgba(0,0,0,0.05)', color: 'rgba(80,80,80,0.7)' }}>{m.low}</span>
-                    <span className="text-xs font-body px-2 py-0.5 rounded-full"
-                      style={{ background: `${m.color}15`, color: m.color, fontWeight: 600 }}>{m.high}</span>
+                      style={{ background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.5)' }}>{m.low}</span>
+                    <span className="text-xs font-body px-2 py-0.5 rounded-full font-semibold"
+                      style={{ background: `${m.color}25`, color: m.color }}>{m.high}</span>
                   </div>
                 </div>
               )

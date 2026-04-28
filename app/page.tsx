@@ -6,7 +6,7 @@ const features = [
   {
     icon: Search,
     title: 'Symptom Checker',
-    desc: 'Describe how you feel — in your own words or from our guided list — and get matched to herbal and natural remedies instantly.',
+    desc: 'Describe how you feel, in your own words or from our guided list, and get matched to herbal and natural remedies instantly.',
     href: '/checker',
     accent: '#22a050',
     gradient: 'linear-gradient(135deg, #145a2e, #22a050)',
@@ -87,7 +87,7 @@ export default function HomePage() {
               </h1>
 
               <p className="text-green-200 text-lg leading-relaxed mb-10 max-w-lg font-body" style={{ opacity: 0.85 }}>
-                Describe your symptoms, identify plants, and discover science-backed herbal remedies from global healing traditions — guided by Dr. Gideon Afolabi's expertise.
+                Describe your symptoms, identify plants, and discover science-backed herbal remedies from global healing traditions, guided by Dr. Gideon Afolabi's expertise.
               </p>
 
               <div className="flex flex-wrap gap-4 mb-12">
@@ -287,10 +287,20 @@ export default function HomePage() {
                   <h3 className="font-display text-2xl font-bold text-green-900 mb-3">{f.title}</h3>
                   <p className="text-gray-500 font-body leading-relaxed text-sm">{f.desc}</p>
 
-                  <div className="mt-6 pt-5 border-t border-gray-50 flex items-center gap-2"
-                    style={{ color: f.accent === '#ffd700' ? '#b87800' : '#22a050' }}>
-                    <span className="text-sm font-body font-semibold">Explore feature</span>
-                    <div className="flex-1 h-px" style={{ background: `linear-gradient(90deg, ${f.accent}40, transparent)` }} />
+                  <div className="mt-6">
+                    <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-body font-bold text-sm transition-all group-hover:scale-105 group-hover:shadow-lg"
+                      style={{
+                        background: f.accent === '#ffd700'
+                          ? 'linear-gradient(135deg,#ffd700,#e6c300)'
+                          : 'linear-gradient(135deg,#0a3d1f,#22a050)',
+                        color: f.accent === '#ffd700' ? '#0a3d1f' : 'white',
+                        boxShadow: f.accent === '#ffd700'
+                          ? '0 4px 16px rgba(255,215,0,0.4)'
+                          : '0 4px 16px rgba(10,61,31,0.35)',
+                      }}>
+                      Explore {f.title}
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -312,7 +322,7 @@ export default function HomePage() {
             Trusted <span className="gold-text">Globally</span>
           </h2>
           <p className="max-w-2xl mx-auto font-body leading-relaxed mb-14" style={{ color: 'rgba(187,244,210,0.7)' }}>
-            Dr. Gideon Afolabi Wellness draws from thousands of years of herbal wisdom across African, Asian, European, and American healing traditions — validated by modern research.
+            Dr. Gideon Afolabi Wellness draws from thousands of years of herbal wisdom across African, Asian, European, and American healing traditions, validated by modern research.
           </p>
           <div className="flex flex-wrap justify-center gap-8">
             {[
@@ -356,7 +366,7 @@ export default function HomePage() {
             Enter your symptoms and get personalized natural remedy suggestions in seconds. No account needed.
           </p>
           <Link href="/checker" className="btn-green text-base px-12 py-4 inline-block">
-            Begin Symptom Check — It's Free
+            Begin Your Free Symptom Check
           </Link>
         </div>
       </section>
