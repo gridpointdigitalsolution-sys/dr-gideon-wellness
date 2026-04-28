@@ -129,7 +129,7 @@ export default function SymptomCheckerPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{background:'#f5f2ed'}}>
+    <div className="min-h-screen" style={{background:'linear-gradient(180deg,#f5f2ed 0%,#f8f6f2 100%)'}}>
 
       {/* ── Hero ── */}
       <div className="bg-forest py-10 px-4 relative overflow-hidden">

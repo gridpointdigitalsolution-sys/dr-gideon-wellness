@@ -240,7 +240,7 @@ export default function HomePage() {
       </section>
 
       {/* FEATURES */}
-      <section className="py-24" style={{ background: '#f0f4f0' }}>
+      <section className="py-24" style={{ background: 'linear-gradient(180deg, #f5f2ed 0%, #f8f6f2 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <p className="text-green-600 text-sm uppercase tracking-widest font-body mb-3">Everything You Need</p>

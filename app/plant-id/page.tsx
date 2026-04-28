@@ -167,7 +167,7 @@ export default function PlantIdentifierPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ background: '#f0f4f0' }}>
+    <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #f5f2ed 0%, #f8f6f2 100%)' }}>
       {/* Header */}
       <div className="bg-forest py-20 px-4 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none"

@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import LoadingBar from '@/components/LoadingBar'
+import PageTransition from '@/components/PageTransition'
 
 export const metadata: Metadata = {
   title: 'Dr. Gideon Afolabi Wellness | Natural Remedies & Herbal Solutions',
@@ -36,13 +38,14 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="theme-color" content="#0a3d1f" />
         <link rel="canonical" href="https://drGideonAfolabi.com" />
-        {/* Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID after approval */}
-        {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossOrigin="anonymous"></script> */}
       </head>
       <body>
+        <LoadingBar />
         <Navbar />
         <main className="min-h-screen" role="main">
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </main>
         <Footer />
       </body>

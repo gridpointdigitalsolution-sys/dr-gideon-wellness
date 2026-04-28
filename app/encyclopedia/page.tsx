@@ -9,6 +9,17 @@ const remedies = remediesData as Remedy[]
 const categories = ['All', ...Array.from(new Set(remedies.map(r => r.category))).sort()]
 const potencies = ['All', 'High', 'Medium', 'Low']
 
+// Normalise potency — some entries store numeric scores instead of strings
+function normalisePotency(p: unknown): string {
+  if (typeof p === 'string') return p
+  if (typeof p === 'number') {
+    if (p >= 4.5) return 'High'
+    if (p >= 4.2) return 'Medium'
+    return 'Low'
+  }
+  return 'Low'
+}
+
 // Build sorted unique ailment list from all remedy symptoms
 const allAilments: string[] = ['All', ...Array.from(
   new Set(remedies.flatMap(r => r.symptoms.map(s => s.toLowerCase().trim())))
@@ -37,7 +48,7 @@ export default function EncyclopediaPage() {
         r.symptoms.some(s => s.toLowerCase().includes(q)) ||
         r.tags.some(t => t.toLowerCase().includes(q))
       const matchCategory = category === 'All' || r.category === category
-      const matchPotency = potency === 'All' || r.potency === potency
+      const matchPotency = potency === 'All' || normalisePotency(r.potency) === potency
       const matchAilment = ailment === 'All' || r.symptoms.some(s => s.toLowerCase().trim() === ailment)
       return matchSearch && matchCategory && matchPotency && matchAilment
     })
