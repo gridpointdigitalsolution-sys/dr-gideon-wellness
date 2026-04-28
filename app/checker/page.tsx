@@ -93,7 +93,6 @@ export default function SymptomCheckerPage() {
     return all
   },[symptomSearch,activeCategory])
 
-  // AUTO-SEARCH on symptom change — wrapped in try/catch/finally so spinner ALWAYS stops
   useEffect(()=>{
     if(selectedSymptoms.length===0){ setResults([]); setSearched(false); return }
     setLoading(true)
@@ -130,10 +129,10 @@ export default function SymptomCheckerPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{background:'#f0f4f0'}}>
+    <div className="min-h-screen" style={{background:'#f5f2ed'}}>
 
-      {/* ── Compact Hero ── */}
-      <div className="bg-forest py-12 px-4 relative overflow-hidden">
+      {/* ── Hero ── */}
+      <div className="bg-forest py-10 px-4 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none"
           style={{backgroundImage:'radial-gradient(circle, rgba(255,215,0,0.4) 1px, transparent 1px)',backgroundSize:'40px 40px'}}/>
         <div className="text-center relative">
@@ -142,89 +141,103 @@ export default function SymptomCheckerPage() {
             <Activity className="w-3.5 h-3.5" style={{color:'rgba(255,215,0,0.8)'}}/>
             <span className="text-xs font-body uppercase tracking-widest" style={{color:'rgba(255,215,0,0.8)'}}>AI-Powered Symptom Analysis</span>
           </div>
-          <h1 className="font-display text-4xl lg:text-5xl font-bold text-white mb-3">
+          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
             How Are You <span className="gold-text">Feeling?</span>
           </h1>
           <p className="font-body max-w-lg mx-auto text-sm" style={{color:'rgba(187,244,210,0.75)'}}>
-            Browse {totalSymptoms}+ symptoms — pick yours and see nature's best remedies instantly on the right.
+            Browse {totalSymptoms}+ symptoms — pick yours and see nature's best remedies instantly.
           </p>
         </div>
       </div>
 
-      {/* ── Main App Layout ── */}
-      <div className="max-w-screen-xl mx-auto px-4 py-6">
-        <div className="flex gap-5 items-start">
+      {/* ── Main Split Layout — side-by-side on ALL screen sizes ── */}
+      <div className="max-w-screen-xl mx-auto px-2 sm:px-3 lg:px-4 py-3 sm:py-5">
+        <div className="flex gap-2 sm:gap-3 lg:gap-5 items-start">
 
           {/* ════════════════════════════════
               LEFT PANEL — Dark Symptom Browser
+              Visible on ALL screen sizes
               ════════════════════════════════ */}
-          <div className="hidden lg:flex flex-col flex-shrink-0 overflow-hidden"
+          <div
+            className="flex flex-col flex-shrink-0 overflow-hidden"
             style={{
-              width:320,
-              position:'sticky', top:84,
-              height:'calc(100vh - 104px)',
-              background:'linear-gradient(180deg,#071c0f 0%,#0a3d1f 100%)',
-              borderRadius:20,
-              border:'1px solid rgba(255,215,0,0.18)',
-              boxShadow:'0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)',
+              width: 'clamp(140px, 38vw, 320px)',
+              position: 'sticky',
+              top: 72,
+              height: 'calc(100vh - 92px)',
+              background: 'linear-gradient(180deg,#071c0f 0%,#0a3d1f 100%)',
+              borderRadius: 16,
+              border: '1px solid rgba(255,215,0,0.18)',
+              boxShadow: '0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)',
             }}>
 
             {/* Panel top bar */}
-            <div className="flex-shrink-0 px-4 pt-4 pb-3"
+            <div className="flex-shrink-0 px-2 sm:px-3 lg:px-4 pt-3 pb-2"
               style={{borderBottom:'1px solid rgba(255,255,255,0.06)'}}>
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-lg flex items-center justify-center"
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center flex-shrink-0"
                     style={{background:'rgba(255,215,0,0.15)',border:'1px solid rgba(255,215,0,0.25)'}}>
-                    <Leaf className="w-3.5 h-3.5" style={{color:'#ffd700'}}/>
+                    <Leaf className="w-3 h-3 sm:w-3.5 sm:h-3.5" style={{color:'#ffd700'}}/>
                   </div>
                   <div>
-                    <p className="text-white font-body font-bold text-base">Symptom Browser</p>
-                    <p className="text-xs font-body" style={{color:'rgba(187,244,210,0.4)'}}>{totalSymptoms} conditions listed</p>
+                    <p className="text-white font-body font-bold leading-tight"
+                      style={{fontSize:'clamp(11px, 2.2vw, 15px)'}}>
+                      Symptom Browser
+                    </p>
+                    <p className="font-body leading-none hidden sm:block"
+                      style={{fontSize:'clamp(9px, 1.5vw, 11px)', color:'rgba(187,244,210,0.4)'}}>
+                      {totalSymptoms} listed
+                    </p>
                   </div>
                 </div>
                 {selectedSymptoms.length>0&&(
                   <div className="flex flex-col items-end gap-0.5">
-                    <span className="text-xs font-body font-bold px-2 py-0.5 rounded-full"
-                      style={{background:'rgba(255,215,0,0.2)',color:'#ffd700',border:'1px solid rgba(255,215,0,0.3)'}}>
-                      {selectedSymptoms.length} picked
+                    <span className="font-body font-bold px-1.5 py-0.5 rounded-full"
+                      style={{fontSize:'clamp(9px,1.8vw,11px)',background:'rgba(255,215,0,0.2)',color:'#ffd700',border:'1px solid rgba(255,215,0,0.3)'}}>
+                      {selectedSymptoms.length}✓
                     </span>
                     <button onClick={()=>setSelectedSymptoms([])}
-                      className="text-xs font-body" style={{color:'rgba(239,68,68,0.7)'}}>clear</button>
+                      className="font-body" style={{fontSize:'clamp(8px,1.5vw,10px)',color:'rgba(239,68,68,0.7)'}}>
+                      clear
+                    </button>
                   </div>
                 )}
               </div>
 
               {/* Search */}
-              <div className="flex items-center gap-2 px-3 py-2 rounded-xl"
+              <div className="flex items-center gap-1.5 px-2 py-1.5 rounded-xl"
                 style={{background:'rgba(255,255,255,0.06)',border:'1px solid rgba(255,215,0,0.14)'}}>
-                <Search className="w-3.5 h-3.5 flex-shrink-0" style={{color:'rgba(255,215,0,0.55)'}}/>
-                <input value={symptomSearch} onChange={e=>{setSymptomSearch(e.target.value)}}
-                  placeholder="Search symptoms..."
-                  className="flex-1 bg-transparent text-sm font-body outline-none"
-                  style={{color:'rgba(255,255,255,0.9)',caretColor:'#ffd700'}}/>
+                <Search className="w-3 h-3 flex-shrink-0" style={{color:'rgba(255,215,0,0.55)'}}/>
+                <input value={symptomSearch} onChange={e=>setSymptomSearch(e.target.value)}
+                  placeholder="Search…"
+                  className="flex-1 bg-transparent font-body outline-none min-w-0"
+                  style={{fontSize:'clamp(10px,2vw,13px)',color:'rgba(255,255,255,0.9)',caretColor:'#ffd700'}}/>
                 {symptomSearch&&(
                   <button onClick={()=>setSymptomSearch('')}>
-                    <X className="w-3.5 h-3.5" style={{color:'rgba(255,255,255,0.35)'}}/>
+                    <X className="w-3 h-3" style={{color:'rgba(255,255,255,0.35)'}}/>
                   </button>
                 )}
               </div>
             </div>
 
-            {/* Category tab strip — horizontal scroll */}
+            {/* Category tabs — horizontal scroll */}
             {!symptomSearch&&(
-              <div className="flex-shrink-0 scroll-x-dark overflow-x-auto px-3 py-2.5"
+              <div className="flex-shrink-0 scroll-x-dark overflow-x-auto px-2 py-2"
                 style={{borderBottom:'1px solid rgba(255,255,255,0.05)'}}>
-                <div className="flex gap-1.5" style={{minWidth:'max-content'}}>
+                <div className="flex gap-1" style={{minWidth:'max-content'}}>
                   {categories.map(cat=>(
                     <button key={cat} onClick={()=>setActiveCategory(cat)}
-                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-body font-semibold whitespace-nowrap transition-all"
-                      style={activeCategory===cat
-                        ?{background:'rgba(255,215,0,0.18)',color:'#ffd700',border:'1px solid rgba(255,215,0,0.3)'}
-                        :{background:'rgba(255,255,255,0.04)',color:'rgba(187,244,210,0.55)',border:'1px solid transparent'}
-                      }>
-                      <span style={{fontSize:12}}>{CAT_ICONS[cat]||'🌿'}</span>
-                      <span>{cat.split(' ')[0]}</span>
+                      className="flex items-center gap-0.5 rounded-lg font-body font-semibold whitespace-nowrap transition-all"
+                      style={{
+                        fontSize:'clamp(9px,1.8vw,11px)',
+                        padding:'4px 6px',
+                        ...(activeCategory===cat
+                          ?{background:'rgba(255,215,0,0.18)',color:'#ffd700',border:'1px solid rgba(255,215,0,0.3)'}
+                          :{background:'rgba(255,255,255,0.04)',color:'rgba(187,244,210,0.55)',border:'1px solid transparent'})
+                      }}>
+                      <span style={{fontSize:'clamp(9px,1.8vw,11px)'}}>{CAT_ICONS[cat]||'🌿'}</span>
+                      <span className="hidden sm:inline">{cat.split(' ')[0]}</span>
                     </button>
                   ))}
                 </div>
@@ -232,38 +245,36 @@ export default function SymptomCheckerPage() {
             )}
 
             {/* Active category label */}
-            <div className="flex-shrink-0 px-4 py-2 flex items-center justify-between">
-              <p className="text-xs font-body font-semibold uppercase tracking-widest"
-                style={{color:'rgba(255,215,0,0.55)'}}>
+            <div className="flex-shrink-0 px-2 sm:px-3 py-1.5 flex items-center justify-between">
+              <p className="font-body font-semibold uppercase tracking-wider truncate"
+                style={{fontSize:'clamp(8px,1.6vw,11px)',color:'rgba(255,215,0,0.55)'}}>
                 {symptomSearch
                   ? `${visibleSymptoms.length} results`
-                  : `${CAT_ICONS[activeCategory]} ${activeCategory}`
+                  : `${CAT_ICONS[activeCategory]} ${activeCategory.split(' ')[0]}`
                 }
               </p>
               {!symptomSearch&&(
-                <span className="text-xs font-body" style={{color:'rgba(187,244,210,0.35)'}}>
-                  {symptomCategories[activeCategory]?.length} items
+                <span className="font-body flex-shrink-0 ml-1"
+                  style={{fontSize:'clamp(8px,1.4vw,10px)',color:'rgba(187,244,210,0.35)'}}>
+                  {symptomCategories[activeCategory]?.length}
                 </span>
               )}
             </div>
 
-            {/* ── Symptom list — scrollable with visible gold scrollbar ── */}
+            {/* Symptom list — scrollable */}
             <div className="relative flex-1 overflow-hidden">
-              {/* Top fade */}
-              <div className="absolute top-0 left-0 right-0 h-4 z-10 pointer-events-none"
+              <div className="absolute top-0 left-0 right-0 h-3 z-10 pointer-events-none"
                 style={{background:'linear-gradient(to bottom, rgba(7,28,15,0.8), transparent)'}}/>
-              {/* Bottom fade — indicates more content */}
-              <div className="absolute bottom-0 left-0 right-0 h-10 z-10 pointer-events-none"
+              <div className="absolute bottom-0 left-0 right-0 h-8 z-10 pointer-events-none"
                 style={{background:'linear-gradient(to top, rgba(7,28,15,0.95), transparent)'}}/>
-              {/* Scroll hint text */}
               <div className="absolute bottom-1 left-0 right-0 z-20 flex justify-center pointer-events-none">
-                <span className="text-xs font-body" style={{color:'rgba(255,215,0,0.35)'}}>↓ scroll for more</span>
+                <span className="font-body" style={{fontSize:'clamp(8px,1.5vw,10px)',color:'rgba(255,215,0,0.35)'}}>↓ more</span>
               </div>
 
-              <div className="scroll-dark overflow-y-auto h-full px-3 pb-12 pt-1">
+              <div className="scroll-dark overflow-y-auto h-full px-1.5 sm:px-2 pb-10 pt-1">
                 {visibleSymptoms.length===0?(
-                  <div className="text-center py-12">
-                    <p className="text-sm font-body" style={{color:'rgba(187,244,210,0.35)'}}>No symptoms found</p>
+                  <div className="text-center py-8">
+                    <p className="font-body" style={{fontSize:11,color:'rgba(187,244,210,0.35)'}}>None found</p>
                   </div>
                 ):(
                   <div className="space-y-0.5">
@@ -271,7 +282,7 @@ export default function SymptomCheckerPage() {
                       const active = selectedSymptoms.includes(s)
                       return (
                         <button key={s} onClick={()=>toggleSymptom(s)}
-                          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all"
+                          className="w-full flex items-center gap-1.5 sm:gap-2 px-2 py-2 rounded-xl text-left transition-all"
                           style={active
                             ?{background:'rgba(255,215,0,0.13)',border:'1px solid rgba(255,215,0,0.28)'}
                             :{background:'transparent',border:'1px solid transparent'}
@@ -279,23 +290,25 @@ export default function SymptomCheckerPage() {
                           onMouseEnter={e=>{if(!active)(e.currentTarget as HTMLButtonElement).style.background='rgba(255,255,255,0.05)'}}
                           onMouseLeave={e=>{if(!active)(e.currentTarget as HTMLButtonElement).style.background='transparent'}}
                         >
-                          {/* Custom checkbox */}
-                          <div className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center transition-all"
+                          <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full flex-shrink-0 flex items-center justify-center transition-all"
                             style={active
-                              ?{background:'linear-gradient(135deg,#ffd700,#e6c300)',boxShadow:'0 0 10px rgba(255,215,0,0.5)'}
+                              ?{background:'linear-gradient(135deg,#ffd700,#e6c300)',boxShadow:'0 0 8px rgba(255,215,0,0.5)'}
                               :{background:'rgba(255,255,255,0.06)',border:'1.5px solid rgba(255,215,0,0.22)'}
                             }>
                             {active&&(
-                              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="#0a3d1f" strokeWidth={3}>
+                              <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="#0a3d1f" strokeWidth={3}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/>
                               </svg>
                             )}
                           </div>
-                          <span className="text-sm font-body capitalize flex-1"
-                            style={{color:active?'#ffd700':'rgba(187,244,210,0.82)',fontWeight:active?'600':'400'}}>
+                          <span className="font-body capitalize flex-1 truncate"
+                            style={{
+                              fontSize:'clamp(10px,2vw,13px)',
+                              color:active?'#ffd700':'rgba(187,244,210,0.82)',
+                              fontWeight:active?'600':'400'
+                            }}>
                             {s}
                           </span>
-                          {active&&<ChevronRight className="w-3.5 h-3.5 flex-shrink-0" style={{color:'rgba(255,215,0,0.45)'}}/>}
                         </button>
                       )
                     })}
@@ -304,8 +317,8 @@ export default function SymptomCheckerPage() {
               </div>
             </div>
 
-            {/* ── Sticky Analyse button at bottom of left panel ── */}
-            <div className="flex-shrink-0 p-3" style={{borderTop:'1px solid rgba(255,255,255,0.06)'}}>
+            {/* Sticky Analyse button */}
+            <div className="flex-shrink-0 p-2 sm:p-3" style={{borderTop:'1px solid rgba(255,255,255,0.06)'}}>
               {selectedSymptoms.length>0?(
                 <button onClick={()=>{
                     setLoading(true)
@@ -316,20 +329,28 @@ export default function SymptomCheckerPage() {
                       setTimeout(()=>resultsRef.current?.scrollIntoView({behavior:'smooth',block:'start'}),100)
                     },400)
                   }}
-                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-body font-bold text-sm transition-all hover:scale-[1.02]"
+                  className="w-full flex items-center justify-center gap-1.5 rounded-xl font-body font-bold transition-all hover:scale-[1.02] active:scale-[0.98]"
                   style={{
+                    padding:'clamp(8px,2vw,12px) 8px',
+                    fontSize:'clamp(10px,2vw,13px)',
                     background:'linear-gradient(135deg,#ffd700,#e6c300)',
                     color:'#0a3d1f',
                     boxShadow:'0 4px 20px rgba(255,215,0,0.45)',
                   }}>
-                  <Zap className="w-4 h-4"/>
-                  Analyse {selectedSymptoms.length} Symptom{selectedSymptoms.length>1?'s':''}
+                  <Zap style={{width:'clamp(12px,2.5vw,16px)',height:'clamp(12px,2.5vw,16px)'}}/>
+                  <span>Analyse {selectedSymptoms.length}</span>
                 </button>
               ):(
-                <div className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-body text-sm"
-                  style={{background:'rgba(255,255,255,0.04)',color:'rgba(187,244,210,0.3)',border:'1px solid rgba(255,255,255,0.06)'}}>
-                  <Leaf className="w-4 h-4"/>
-                  Pick a symptom to begin
+                <div className="w-full flex items-center justify-center gap-1 rounded-xl font-body"
+                  style={{
+                    padding:'clamp(8px,2vw,12px) 8px',
+                    fontSize:'clamp(9px,1.8vw,12px)',
+                    background:'rgba(255,255,255,0.04)',
+                    color:'rgba(187,244,210,0.3)',
+                    border:'1px solid rgba(255,255,255,0.06)'
+                  }}>
+                  <Leaf style={{width:12,height:12}}/>
+                  <span>Pick a symptom</span>
                 </div>
               )}
             </div>
@@ -340,72 +361,52 @@ export default function SymptomCheckerPage() {
               ════════════════════════════════ */}
           <div className="flex-1 min-w-0">
 
-            {/* Mobile symptom chips */}
-            <div className="lg:hidden mb-4 rounded-2xl p-4 overflow-hidden"
-              style={{background:'linear-gradient(135deg,#071c0f,#0a3d1f)',border:'1px solid rgba(255,215,0,0.15)'}}>
-              <p className="font-body text-xs uppercase tracking-widest mb-3 font-semibold" style={{color:'rgba(255,215,0,0.7)'}}>Quick-select symptoms</p>
-              <div className="flex flex-wrap gap-2">
-                {Object.values(symptomCategories).flat().slice(0,40).map(s=>(
-                  <button key={s} onClick={()=>toggleSymptom(s)}
-                    className="px-3 py-1.5 rounded-full text-xs font-body capitalize transition-all"
-                    style={selectedSymptoms.includes(s)
-                      ?{background:'linear-gradient(135deg,#ffd700,#e6c300)',color:'#0a3d1f',fontWeight:'700'}
-                      :{background:'rgba(255,255,255,0.07)',color:'rgba(187,244,210,0.8)',border:'1px solid rgba(255,215,0,0.15)'}
-                    }>{s}</button>
-                ))}
-              </div>
-              {selectedSymptoms.length>0&&(
-                <button onClick={handleSearch}
-                  className="mt-4 w-full flex items-center justify-center gap-2 py-3 rounded-xl font-body font-bold text-sm"
-                  style={{background:'linear-gradient(135deg,#ffd700,#e6c300)',color:'#0a3d1f',boxShadow:'0 4px 16px rgba(255,215,0,0.4)'}}>
-                  <Zap className="w-4 h-4"/> Analyse {selectedSymptoms.length} Symptoms
-                </button>
-              )}
-            </div>
-
             {/* Selected chips strip */}
             {selectedSymptoms.length>0&&(
-              <div className="rounded-2xl p-4 mb-4"
+              <div className="rounded-2xl p-3 sm:p-4 mb-3 sm:mb-4"
                 style={{background:'white',border:'1px solid rgba(255,215,0,0.25)',boxShadow:'0 4px 20px rgba(10,61,31,0.06)'}}>
-                <div className="flex items-center justify-between mb-2.5">
+                <div className="flex items-center justify-between mb-2">
                   <p className="text-xs uppercase tracking-widest font-body font-bold" style={{color:'#b87800'}}>
-                    {selectedSymptoms.length} Symptom{selectedSymptoms.length>1?'s':''} Selected
+                    {selectedSymptoms.length} Selected
                   </p>
                   <button onClick={()=>setSelectedSymptoms([])}
                     className="text-xs font-body hover:opacity-70 transition-opacity" style={{color:'#ef4444'}}>
-                    Clear all
+                    Clear
                   </button>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {selectedSymptoms.map(s=>(
                     <span key={s} onClick={()=>toggleSymptom(s)}
-                      className="px-3 py-1.5 rounded-full text-xs font-body cursor-pointer capitalize flex items-center gap-1.5 transition-all hover:opacity-75"
+                      className="px-2.5 py-1 rounded-full text-xs font-body cursor-pointer capitalize flex items-center gap-1 transition-all hover:opacity-75"
                       style={{background:'linear-gradient(135deg,#ffd700,#e6c300)',color:'#0a3d1f',fontWeight:'600',boxShadow:'0 2px 8px rgba(255,215,0,0.3)'}}>
-                      {s}<X className="w-3 h-3" style={{opacity:.6}}/>
+                      {s}<X className="w-2.5 h-2.5" style={{opacity:.6}}/>
                     </span>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* Free text + search */}
-            <div className="rounded-2xl mb-5 overflow-hidden"
+            {/* Free text */}
+            <div className="rounded-2xl mb-3 sm:mb-4 overflow-hidden"
               style={{background:'white',border:'1px solid rgba(255,215,0,0.18)',boxShadow:'0 4px 20px rgba(10,61,31,0.05)'}}>
-              <div className="flex items-center gap-2 px-5 pt-4 pb-3"
+              <div className="flex items-center gap-2 px-3 sm:px-5 pt-3 pb-2"
                 style={{borderBottom:'1px solid rgba(34,160,80,0.08)'}}>
-                <Sparkles className="w-4 h-4" style={{color:'#ffd700'}}/>
+                <Sparkles className="w-3.5 h-3.5 flex-shrink-0" style={{color:'#ffd700'}}/>
                 <span className="text-xs font-body uppercase tracking-widest" style={{color:'rgba(34,160,80,0.8)'}}>
-                  Also describe in your own words (optional)
+                  <span className="hidden sm:inline">Describe in your own words </span>
+                  <span className="sm:hidden">Optional details </span>
+                  (optional)
                 </span>
               </div>
-              <div className="p-4">
+              <div className="p-3 sm:p-4">
                 <textarea value={freeText} onChange={e=>setFreeText(e.target.value)}
-                  placeholder="e.g. I feel bloated after meals, have trouble sleeping and notice hair thinning..."
-                  className="w-full h-24 resize-none font-body text-sm text-gray-700 bg-transparent outline-none leading-relaxed"
+                  placeholder="e.g. bloated after meals, trouble sleeping..."
+                  className="w-full resize-none font-body text-sm text-gray-700 bg-transparent outline-none leading-relaxed"
+                  style={{height:'clamp(60px,12vw,96px)'}}
                   maxLength={300}/>
-                <div className="flex items-center justify-between border-t pt-2.5 mt-1"
+                <div className="flex items-center justify-between border-t pt-2"
                   style={{borderColor:'rgba(34,160,80,0.08)'}}>
-                  <div className="flex items-center gap-2 flex-1 mr-4">
+                  <div className="flex items-center gap-2 flex-1 mr-3">
                     <div className="flex-1 h-1 rounded-full overflow-hidden" style={{background:'rgba(34,160,80,0.1)'}}>
                       <div className="h-full rounded-full transition-all"
                         style={{width:`${(freeText.length/300)*100}%`,background:freeText.length>250?'linear-gradient(90deg,#f59e0b,#ef4444)':'linear-gradient(90deg,#22a050,#ffd700)'}}/>
@@ -417,11 +418,13 @@ export default function SymptomCheckerPage() {
               </div>
             </div>
 
-            {/* Search button (for free text or combined) */}
+            {/* Search / Find button */}
             <button onClick={handleSearch}
               disabled={loading||(!freeText.trim()&&selectedSymptoms.length===0)}
-              className="w-full flex items-center justify-center gap-3 text-base font-body font-bold rounded-2xl py-4 mb-6 transition-all"
+              className="w-full flex items-center justify-center gap-2 font-body font-bold rounded-2xl mb-4 transition-all"
               style={{
+                fontSize:'clamp(12px,2.5vw,16px)',
+                padding:'clamp(10px,2.5vw,16px)',
                 background:(freeText.trim()||selectedSymptoms.length>0)?'linear-gradient(135deg,#0a3d1f,#145a2e)':'rgba(0,0,0,0.06)',
                 color:(freeText.trim()||selectedSymptoms.length>0)?'#ffd700':'#aaa',
                 cursor:(freeText.trim()||selectedSymptoms.length>0)?'pointer':'not-allowed',
@@ -429,40 +432,39 @@ export default function SymptomCheckerPage() {
                 border:(freeText.trim()||selectedSymptoms.length>0)?'1px solid rgba(255,215,0,0.2)':'1px solid transparent',
               }}>
               {loading
-                ?<><Loader className="w-5 h-5 animate-spin"/>Analysing your symptoms...</>
-                :<><Search className="w-5 h-5"/>Find Natural Remedies</>
+                ?<><Loader className="w-4 h-4 animate-spin"/>Analysing…</>
+                :<><Search className="w-4 h-4"/>Find Natural Remedies</>
               }
             </button>
 
-            {/* ── Results area ── */}
+            {/* Results area */}
             <div ref={resultsRef}>
 
               {/* Loading skeleton */}
               {loading&&(
                 <div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center"
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
                       style={{background:'linear-gradient(135deg,rgba(255,215,0,0.15),rgba(34,160,80,0.1))'}}>
-                      <Leaf className="w-5 h-5 animate-pulse" style={{color:'#ffd700'}}/>
+                      <Leaf className="w-4 h-4 animate-pulse" style={{color:'#ffd700'}}/>
                     </div>
                     <div>
-                      <p className="font-display font-bold text-green-900">Searching Nature's Pharmacy…</p>
+                      <p className="font-display font-bold text-green-900 text-sm sm:text-base">Searching Nature's Pharmacy…</p>
                       <p className="text-xs font-body text-gray-400">Matching against 500+ herbal remedies</p>
                     </div>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                    {[1,2,3,4,5,6].map(i=>(
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {[1,2,3,4].map(i=>(
                       <div key={i} className="rounded-2xl overflow-hidden animate-pulse"
-                        style={{background:'white',border:'1px solid rgba(255,215,0,0.1)',height:220}}>
-                        <div style={{height:40,background:'rgba(34,160,80,0.06)'}}/>
-                        <div className="p-4 space-y-3">
-                          <div style={{height:16,borderRadius:8,background:'rgba(0,0,0,0.06)',width:'60%'}}/>
-                          <div style={{height:12,borderRadius:8,background:'rgba(0,0,0,0.04)',width:'40%'}}/>
-                          <div className="flex gap-2 flex-wrap">
-                            {[1,2,3].map(j=><div key={j} style={{height:24,width:60,borderRadius:99,background:'rgba(34,160,80,0.07)'}}/>)}
+                        style={{background:'white',border:'1px solid rgba(255,215,0,0.1)',height:180}}>
+                        <div style={{height:36,background:'rgba(34,160,80,0.06)'}}/>
+                        <div className="p-3 space-y-2">
+                          <div style={{height:14,borderRadius:8,background:'rgba(0,0,0,0.06)',width:'60%'}}/>
+                          <div style={{height:11,borderRadius:8,background:'rgba(0,0,0,0.04)',width:'40%'}}/>
+                          <div className="flex gap-2">
+                            {[1,2].map(j=><div key={j} style={{height:22,width:50,borderRadius:99,background:'rgba(34,160,80,0.07)'}}/>)}
                           </div>
-                          <div style={{height:12,borderRadius:8,background:'rgba(0,0,0,0.04)'}}/>
-                          <div style={{height:12,borderRadius:8,background:'rgba(0,0,0,0.04)',width:'80%'}}/>
+                          <div style={{height:11,borderRadius:8,background:'rgba(0,0,0,0.04)'}}/>
                         </div>
                       </div>
                     ))}
@@ -473,7 +475,7 @@ export default function SymptomCheckerPage() {
               {/* Results */}
               {!loading&&searched&&(
                 <div>
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-5">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
                     <div>
                       <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-2"
                         style={{
@@ -486,40 +488,38 @@ export default function SymptomCheckerPage() {
                         }
                         <span className="text-xs font-body font-bold uppercase tracking-widest"
                           style={{color:results.length>0?'#22a050':'#ef4444'}}>
-                          {results.length>0?`${results.length} remedies matched`:'No matches found'}
+                          {results.length>0?`${results.length} matched`:'No matches'}
                         </span>
                       </div>
-                      <h2 className="font-display text-2xl font-bold text-green-900">
-                        {results.length>0?'Your Personalised Remedy Plan':'Try Different Symptoms'}
+                      <h2 className="font-display font-bold text-green-900"
+                        style={{fontSize:'clamp(16px,3.5vw,24px)'}}>
+                        {results.length>0?'Your Remedy Plan':'Try Different Symptoms'}
                       </h2>
-                      {results.length>0&&(
-                        <p className="text-sm font-body mt-1" style={{color:'rgba(100,130,110,0.75)'}}>
-                          Ranked by relevance · sorted by potency
-                        </p>
-                      )}
                     </div>
                     {results.length>0&&(
                       <button onClick={()=>downloadPDF(results,selectedSymptoms,freeText)}
-                        className="flex items-center gap-2 font-body font-bold text-sm px-5 py-3 rounded-xl transition-all hover:scale-105 flex-shrink-0"
+                        className="flex items-center gap-2 font-body font-bold text-xs sm:text-sm px-3 sm:px-5 py-2.5 rounded-xl transition-all hover:scale-105 flex-shrink-0"
                         style={{background:'linear-gradient(135deg,#ffd700,#e6c300)',color:'#0a3d1f',boxShadow:'0 4px 16px rgba(255,215,0,0.35)'}}>
-                        <Download className="w-4 h-4"/>Download PDF Report
+                        <Download className="w-3.5 h-3.5"/>
+                        <span className="hidden sm:inline">Download PDF Report</span>
+                        <span className="sm:hidden">PDF</span>
                       </button>
                     )}
                   </div>
 
-                  <div className="h-px mb-6" style={{background:'linear-gradient(90deg,transparent,rgba(255,215,0,0.4),transparent)'}}/>
+                  <div className="h-px mb-4" style={{background:'linear-gradient(90deg,transparent,rgba(255,215,0,0.4),transparent)'}}/>
 
                   {results.length>0?(
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       {results.map(remedy=><RemedyCard key={remedy.id} remedy={remedy}/>)}
                     </div>
                   ):(
-                    <div className="text-center py-16 rounded-2xl"
+                    <div className="text-center py-12 rounded-2xl"
                       style={{background:'white',border:'1px solid rgba(255,215,0,0.12)'}}>
-                      <FileText className="w-12 h-12 mx-auto mb-4 text-gray-300"/>
-                      <p className="font-display text-lg text-gray-400 mb-2">No exact matches found</p>
-                      <p className="text-sm text-gray-400 font-body mb-6">Try selecting different symptoms or browsing the full encyclopedia</p>
-                      <Link href="/encyclopedia" className="btn-gold text-sm inline-block">Browse All 500+ Remedies</Link>
+                      <FileText className="w-10 h-10 mx-auto mb-3 text-gray-300"/>
+                      <p className="font-display text-base text-gray-400 mb-2">No exact matches found</p>
+                      <p className="text-xs text-gray-400 font-body mb-5">Try selecting different symptoms</p>
+                      <Link href="/encyclopedia" className="btn-gold text-sm inline-block">Browse All Remedies</Link>
                     </div>
                   )}
                 </div>
@@ -527,21 +527,24 @@ export default function SymptomCheckerPage() {
 
               {/* Empty state */}
               {!loading&&!searched&&(
-                <div className="text-center py-16 rounded-2xl"
+                <div className="text-center py-10 sm:py-14 rounded-2xl"
                   style={{background:'white',border:'1px solid rgba(255,215,0,0.1)',boxShadow:'0 4px 24px rgba(10,61,31,0.04)'}}>
-                  <div className="w-20 h-20 rounded-full mx-auto mb-5 flex items-center justify-center"
+                  <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full mx-auto mb-4 flex items-center justify-center"
                     style={{background:'linear-gradient(135deg,rgba(255,215,0,0.08),rgba(34,160,80,0.06))',border:'1px solid rgba(255,215,0,0.18)'}}>
-                    <Activity className="w-9 h-9" style={{color:'rgba(34,160,80,0.4)'}}/>
+                    <Activity className="w-6 h-6 sm:w-9 sm:h-9" style={{color:'rgba(34,160,80,0.4)'}}/>
                   </div>
-                  <p className="font-display text-xl text-green-900 mb-2">Your remedy plan appears here</p>
-                  <p className="text-sm font-body text-gray-400 max-w-xs mx-auto leading-relaxed">
-                    Select symptoms from the left panel — results update <strong>instantly</strong> as you pick.
+                  <p className="font-display font-bold text-green-900 mb-2"
+                    style={{fontSize:'clamp(14px,3vw,20px)'}}>
+                    Your remedy plan appears here
                   </p>
-                  <div className="flex justify-center gap-6 mt-8">
-                    {['anxiety','headache','fatigue','digestion','insomnia'].map(s=>(
+                  <p className="text-xs sm:text-sm font-body text-gray-400 max-w-xs mx-auto leading-relaxed px-4">
+                    Select from the left panel — results update <strong>instantly</strong>.
+                  </p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-5 px-2 sm:px-4 w-full max-w-xs mx-auto">
+                    {['anxiety','headache','fatigue','digestion','insomnia'].map((s,i)=>(
                       <button key={s} onClick={()=>toggleSymptom(s)}
-                        className="px-3 py-2 rounded-xl text-xs font-body capitalize transition-all hover:scale-105"
-                        style={{background:'rgba(34,160,80,0.08)',color:'#145a2e',border:'1px solid rgba(34,160,80,0.18)'}}>
+                        className={`py-2 rounded-xl font-body capitalize transition-all hover:scale-105 text-center${i===4?' col-span-2 sm:col-span-1':''}`}
+                        style={{fontSize:'clamp(10px,2.2vw,12px)',background:'rgba(34,160,80,0.08)',color:'#145a2e',border:'1px solid rgba(34,160,80,0.18)'}}>
                         {s}
                       </button>
                     ))}

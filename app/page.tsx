@@ -128,11 +128,8 @@ export default function HomePage() {
             </div>
 
             {/* Right: Dr. Gideon image with GOLD ORBITING BALLS */}
-            <div className="relative flex justify-center items-center py-16">
-              {/* Outer orbit ring decorations */}
-              <div className="orbit-ring" style={{ inset: '-40px', width: 'calc(100% + 80px)', height: 'calc(100% + 80px)', left: '-40px', top: '-40px', opacity: 0.25 }} />
-
-              <div className="relative" style={{ width: 380, height: 380 }}>
+            <div className="relative flex justify-center items-center py-8 lg:py-16">
+              <div className="relative mx-auto" style={{ width: 'clamp(240px, 70vw, 380px)', height: 'clamp(240px, 70vw, 380px)' }}>
 
                 {/* Orbit rings (visual tracks) */}
                 <div className="absolute rounded-full pointer-events-none"
@@ -206,18 +203,18 @@ export default function HomePage() {
                   <p className="text-green-900 text-xs" style={{ opacity: 0.75 }}>Natural Wellness Expert</p>
                 </div>
 
-                {/* Floating credential badges */}
-                <div className="absolute -left-12 top-1/4 glass-card px-3 py-2 flex items-center gap-2"
+                {/* Floating credential badges — hidden on small screens */}
+                <div className="hidden sm:flex absolute -left-12 top-1/4 glass-card px-3 py-2 items-center gap-2"
                   style={{ border: '1px solid rgba(34,160,80,0.3)' }}>
                   <Shield className="w-4 h-4" style={{ color: '#22a050' }} />
                   <span className="text-xs font-body text-white whitespace-nowrap">Evidence-Based</span>
                 </div>
-                <div className="absolute -right-12 top-1/3 glass-card px-3 py-2 flex items-center gap-2"
+                <div className="hidden sm:flex absolute -right-12 top-1/3 glass-card px-3 py-2 items-center gap-2"
                   style={{ border: '1px solid rgba(255,215,0,0.3)' }}>
                   <Globe className="w-4 h-4" style={{ color: '#ffd700' }} />
                   <span className="text-xs font-body text-white whitespace-nowrap">Global Reach</span>
                 </div>
-                <div className="absolute -right-8 bottom-1/4 glass-card px-3 py-2 flex items-center gap-2"
+                <div className="hidden sm:flex absolute -right-8 bottom-1/4 glass-card px-3 py-2 items-center gap-2"
                   style={{ border: '1px solid rgba(34,160,80,0.3)' }}>
                   <Star className="w-4 h-4 fill-yellow-400" style={{ color: '#ffd700' }} />
                   <span className="text-xs font-body text-white whitespace-nowrap">20+ Years</span>
