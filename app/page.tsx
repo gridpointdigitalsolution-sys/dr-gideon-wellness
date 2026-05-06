@@ -2,6 +2,32 @@
 import Link from 'next/link'
 import { Search, Leaf, Activity, BookOpen, ArrowRight, Star, Shield, Globe, Quote, CheckCircle, ChevronRight } from 'lucide-react'
 
+// Floating leaf particles injected at mount
+function ParticleField({ count = 14 }: { count?: number }) {
+  const particles = Array.from({ length: count }, (_, i) => ({
+    id: i,
+    emoji: ['🌿','🍃','🌱','🌾','🍀'][i % 5],
+    left: `${(i * 7.3 + 3) % 100}%`,
+    delay: `${(i * 1.3) % 12}s`,
+    duration: `${14 + (i * 2.1) % 12}s`,
+    size: 10 + (i % 5) * 4,
+    opacity: 0.18 + (i % 4) * 0.06,
+  }))
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
+      {particles.map(p => (
+        <span key={p.id} className="particle select-none" style={{
+          left: p.left, bottom: '-20px',
+          fontSize: p.size,
+          opacity: p.opacity,
+          animationDuration: p.duration,
+          animationDelay: p.delay,
+        }}>{p.emoji}</span>
+      ))}
+    </div>
+  )
+}
+
 const features = [
   {
     icon: Search,
@@ -79,21 +105,24 @@ export default function HomePage() {
   return (
     <div>
       {/* ─── HERO ─── */}
-      <section className="bg-forest relative overflow-hidden min-h-[88vh] flex items-center">
-        {/* Calmer ambient glow — single soft source */}
+      <section className="encyclopedia-hero relative overflow-hidden min-h-[90vh] flex items-center">
+        {/* Ambient glows */}
         <div className="absolute top-0 right-0 w-[700px] h-[700px] rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(255,215,0,0.05) 0%, transparent 65%)' }} />
+          style={{ background: 'radial-gradient(circle, rgba(255,215,0,0.07) 0%, transparent 65%)' }} />
         <div className="absolute -bottom-32 -left-20 w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(34,160,80,0.06) 0%, transparent 70%)' }} />
+          style={{ background: 'radial-gradient(circle, rgba(34,160,80,0.08) 0%, transparent 70%)' }} />
 
-        {/* Subtle dot grid (lower opacity, cleaner) */}
-        <div className="absolute inset-0 opacity-[0.12] pointer-events-none"
+        {/* Dot grid */}
+        <div className="absolute inset-0 opacity-[0.10] pointer-events-none"
           style={{
             backgroundImage: 'radial-gradient(circle, rgba(255,215,0,0.5) 1px, transparent 1px)',
             backgroundSize: '44px 44px',
           }} />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 w-full relative">
+        {/* Floating leaf particles */}
+        <ParticleField count={16} />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 w-full relative" style={{ zIndex: 2 }}>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
             {/* Left: Text — 7 cols for stronger hierarchy */}
@@ -107,7 +136,7 @@ export default function HomePage() {
               <h1 className="font-display font-bold text-white leading-[1.05] mb-7"
                 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.75rem)', letterSpacing: '-0.025em' }}>
                 Natural remedies,<br />
-                <span className="shimmer-gold">guided by science</span><br />
+                <span className="shimmer-gold-slow">guided by science</span><br />
                 and tradition.
               </h1>
 
@@ -347,13 +376,14 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
-            {features.map((f) => (
+            {features.map((f, idx) => (
               <Link key={f.title} href={f.href}
-                className="group relative overflow-hidden block rounded-[24px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
+                className={`group relative overflow-hidden block rounded-[24px] interactive-card fade-in-up fade-in-up-${idx + 1}`}
                 style={{
                   background: 'linear-gradient(145deg, #ffffff 0%, #f7f4ef 100%)',
                   border: '1.5px solid rgba(34,160,80,0.12)',
                   boxShadow: '0 4px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04)',
+                  transition: 'all 0.35s cubic-bezier(0.16,1,0.3,1)',
                 }}>
 
                 {/* Animated gradient border on hover */}

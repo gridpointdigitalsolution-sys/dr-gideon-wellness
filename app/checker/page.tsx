@@ -141,22 +141,33 @@ export default function SymptomCheckerPage() {
   return (
     <div className="min-h-screen" style={{background:'linear-gradient(180deg,#f5f2ed 0%,#f8f6f2 100%)'}}>
 
-      {/* ── Hero ── */}
-      <div className="bg-forest py-10 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 pointer-events-none"
-          style={{backgroundImage:'radial-gradient(circle, rgba(255,215,0,0.4) 1px, transparent 1px)',backgroundSize:'40px 40px'}}/>
+      {/* ── Hero — animated gradient ── */}
+      <div className="encyclopedia-hero py-12 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.11] pointer-events-none"
+          style={{backgroundImage:'radial-gradient(circle, rgba(255,215,0,0.55) 1px, transparent 1px)',backgroundSize:'44px 44px'}}/>
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none"
+          style={{background:'radial-gradient(circle,rgba(255,215,0,0.06),transparent 70%)'}}/>
         <div className="text-center relative">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-3"
-            style={{background:'rgba(255,215,0,0.1)',border:'1px solid rgba(255,215,0,0.2)'}}>
-            <Activity className="w-3.5 h-3.5" style={{color:'rgba(255,215,0,0.8)'}}/>
-            <span className="text-xs font-body uppercase tracking-widest" style={{color:'rgba(255,215,0,0.8)'}}>AI-Powered Symptom Analysis</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4"
+            style={{background:'rgba(255,215,0,0.09)',border:'1px solid rgba(255,215,0,0.25)'}}>
+            <Activity className="w-3.5 h-3.5" style={{color:'rgba(255,215,0,0.85)'}}/>
+            <span className="text-[11px] font-body uppercase tracking-[0.18em]" style={{color:'rgba(255,215,0,0.85)'}}>AI-Powered Symptom Analysis</span>
           </div>
-          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
-            How Are You <span className="gold-text">Feeling?</span>
+          <h1 className="font-display font-bold text-white mb-3"
+            style={{fontSize:'clamp(2rem,5.5vw,3.75rem)',letterSpacing:'-0.03em',lineHeight:1.08}}>
+            How Are You <span className="shimmer-gold-slow">Feeling?</span>
           </h1>
-          <p className="font-body max-w-lg mx-auto text-sm" style={{color:'rgba(187,244,210,0.75)'}}>
-            Browse {totalSymptoms}+ symptoms, pick yours and see nature's best remedies instantly.
+          <p className="font-body max-w-lg mx-auto" style={{color:'rgba(187,244,210,0.75)',fontSize:'clamp(0.9rem,1.3vw,1.05rem)'}}>
+            Browse {totalSymptoms}+ symptoms, pick yours and see nature&apos;s best remedies instantly.
           </p>
+          <div className="flex items-center justify-center gap-6 mt-5 flex-wrap">
+            {([['500+','Curated remedies'],['20','Categories'],['6','Healing traditions']] as string[][]).map(([v,l])=>(
+              <div key={l} className="text-center">
+                <div className="font-display font-bold text-base shimmer-gold-slow">{v}</div>
+                <div className="font-body text-[10px] mt-0.5" style={{color:'rgba(255,255,255,0.38)',letterSpacing:'0.1em',textTransform:'uppercase'}}>{l}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -165,9 +176,9 @@ export default function SymptomCheckerPage() {
           ══════════════════════════════════════════ */}
       <div className="lg:hidden"
         style={{
-          background:'linear-gradient(180deg,#071c0f 0%,#0a3d1f 100%)',
-          borderBottom:'1px solid rgba(255,215,0,0.18)',
-          boxShadow:'0 4px 24px rgba(0,0,0,0.25)',
+          background:'linear-gradient(180deg,#061510 0%,#0a3d1f 100%)',
+          borderBottom:'1px solid rgba(255,215,0,0.22)',
+          boxShadow:'0 6px 32px rgba(0,0,0,0.35)',
         }}>
 
         {/* Panel header */}
@@ -510,7 +521,7 @@ export default function SymptomCheckerPage() {
             {/* Selected chips strip */}
             {selectedSymptoms.length>0&&(
               <div className="rounded-2xl p-3 sm:p-4 mb-3 sm:mb-4"
-                style={{background:'white',border:'1px solid rgba(255,215,0,0.25)',boxShadow:'0 4px 20px rgba(10,61,31,0.06)'}}>
+                style={{background:'rgba(255,255,255,0.92)',backdropFilter:'blur(12px)',border:'1px solid rgba(255,215,0,0.28)',boxShadow:'0 4px 24px rgba(10,61,31,0.08)'}}>
                 <div className="flex items-center justify-between mb-2">
                   <p className="text-xs uppercase tracking-widest font-body font-bold" style={{color:'#b87800'}}>
                     {selectedSymptoms.length} Selected
@@ -534,7 +545,7 @@ export default function SymptomCheckerPage() {
 
             {/* Free text */}
             <div className="rounded-2xl mb-3 sm:mb-4 overflow-hidden"
-              style={{background:'white',border:'1px solid rgba(255,215,0,0.18)',boxShadow:'0 4px 20px rgba(10,61,31,0.05)'}}>
+              style={{background:'rgba(255,255,255,0.94)',backdropFilter:'blur(10px)',border:'1px solid rgba(255,215,0,0.2)',boxShadow:'0 4px 24px rgba(10,61,31,0.06)'}}>
               <div className="flex items-center gap-2 px-3 sm:px-5 pt-3 pb-2"
                 style={{borderBottom:'1px solid rgba(34,160,80,0.08)'}}>
                 <Sparkles className="w-3.5 h-3.5 flex-shrink-0" style={{color:'#ffd700'}}/>
@@ -674,7 +685,7 @@ export default function SymptomCheckerPage() {
               {/* Empty state */}
               {!loading&&!searched&&(
                 <div className="text-center py-10 sm:py-14 rounded-2xl"
-                  style={{background:'white',border:'1px solid rgba(255,215,0,0.1)',boxShadow:'0 4px 24px rgba(10,61,31,0.04)'}}>
+                  style={{background:'rgba(255,255,255,0.92)',border:'1px solid rgba(255,215,0,0.14)',boxShadow:'0 4px 28px rgba(10,61,31,0.06)'}}>
                   <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full mx-auto mb-4 flex items-center justify-center"
                     style={{background:'linear-gradient(135deg,rgba(255,215,0,0.08),rgba(34,160,80,0.06))',border:'1px solid rgba(255,215,0,0.18)'}}>
                     <Activity className="w-6 h-6 sm:w-9 sm:h-9" style={{color:'rgba(34,160,80,0.4)'}}/>
