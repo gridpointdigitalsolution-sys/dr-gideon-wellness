@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(netstat -ano)",
+      "Bash(python3 -c \"import sys,json; logs=json.load\\(sys.stdin\\); errors=[l for l in logs if 'error' in l.get\\('type',''\\).lower\\(\\) or 'Error' in l.get\\('text',''\\)]; [print\\(e.get\\('text',''\\)[:300]\\) for e in errors[:10]]\")",
+      "Bash(node -e ' *)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npx tsc *)",
+      "Bash(curl -s http://localhost:3001/)"
+    ]
+  }
+}

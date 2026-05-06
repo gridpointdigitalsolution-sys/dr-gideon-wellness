@@ -51,10 +51,10 @@ const traditions = [
 ]
 
 const timeline = [
-  { year: '2000s', label: 'The Calling', desc: 'A divine insight sparked a lifelong mission to reveal the untapped powers of natural remedies.' },
-  { year: '2010s', label: 'Cornell University', desc: 'Specialized in Medicinal Plants at the prestigious College of Agriculture and Life Sciences, USA.' },
-  { year: '2015+', label: 'Herbal Wisdom Reviews', desc: 'Founded the platform to democratize access to nature\'s healing intelligence globally.' },
-  { year: 'Now', label: 'PhD & Beyond', desc: 'Pursuing a doctorate in Natural Medicine while guiding thousands worldwide to natural health.' },
+  { year: '2000s', label: 'Began the work', desc: 'Started studying medicinal plants and pastoral care in parallel — two disciplines, one purpose.' },
+  { year: '2010s', label: 'Cornell University', desc: 'Specialised in Medicinal Plants at the College of Agriculture and Life Sciences.' },
+  { year: '2015+', label: 'Herbal Wisdom Reviews', desc: 'Founded the platform to put trusted herbal guidance in front of anyone with an internet connection.' },
+  { year: 'Now', label: 'PhD in progress', desc: 'Completing a doctorate in Natural Medicine while serving clients across four continents.' },
 ]
 
 export default function AboutPage() {
@@ -79,7 +79,7 @@ export default function AboutPage() {
                 <span className="gold-text">Gideon Afolabi</span>
               </h1>
               <p className="text-lead font-body mb-8" style={{ color: 'rgba(187,244,210,0.82)', maxWidth: 480 }}>
-                A man whose life is a tapestry of deep faith, a profound love for nature, and an unwavering commitment to humanity's well-being. He bridges ancient wisdom with modern preventive health.
+                Cornell-trained medicinal plant expert. Pastor. Founder of Herbal Wisdom Reviews. Twenty years connecting global healing traditions to the people who need them.
               </p>
               <Link href="/checker" className="btn-gold">
                 Get a Free Assessment
@@ -139,29 +139,28 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
             {/* Bio text */}
             <div className="lg:col-span-3 space-y-6">
-              {/* Drop-cap first paragraph */}
               <p className="font-body text-gray-700 leading-relaxed" style={{ fontSize: '1.05rem' }}>
-                <span className="float-left font-display font-bold mr-2 mt-1 leading-none"
-                  style={{ fontSize: '4rem', color: '#0a3d1f', lineHeight: 0.85 }}>R</span>
-                everend Dr. Gideon Afolabi, the visionary founder of Herbal Wisdom Reviews, is a man whose life is a tapestry of deep faith, a profound love for nature, and an unwavering commitment to humanity's well-being. For over two decades, this passion has not merely simmered in silence. It has been a loud call to action that Dr. Afolabi has answered with courage and dedication.
+                <strong className="font-display font-bold text-green-900" style={{ fontSize: '1.15rem' }}>Dr. Gideon Afolabi</strong> has spent two decades studying medicinal plants and the healing traditions that built our understanding of them. He founded Herbal Wisdom Reviews to make that knowledge usable: searchable, safe, and free of the noise that surrounds wellness today.
               </p>
+
               <p className="font-body text-gray-700 leading-relaxed" style={{ fontSize: '1.05rem' }}>
-                As a pastor, he has nurtured souls. Now, with Herbal Wisdom Reviews, he seeks to nurture bodies and minds, guiding people to a deeper understanding and appreciation of the healing virtues that nature holds.
+                He trained at Cornell University&apos;s College of Agriculture and Life Sciences, specialising in Medicinal Plants. He is currently completing a PhD in Natural Medicine and Functional Health Management. Before that — and still today — he serves as a pastor.
               </p>
 
               {/* Pull quote */}
               <blockquote className="relative pl-6 py-1 my-6"
                 style={{ borderLeft: '3px solid #ffd700' }}>
                 <p className="font-display text-lg italic text-green-900 leading-relaxed">
-                  "His dedication is not just about advocating for natural remedies, but is a call to humanity to reconnect with the environment, to respect it, and to learn from its wisdom."
+                  &ldquo;Plants have been doing this work for ten thousand years. My job is just to translate, verify, and pass it on.&rdquo;
                 </p>
               </blockquote>
 
               <p className="font-body text-gray-700 leading-relaxed" style={{ fontSize: '1.05rem' }}>
-                As a graduate of the prestigious <strong className="text-green-900 font-semibold">Cornell University, College of Agriculture and Life Sciences, USA</strong>, with a specialization in Medicinal Plants, and currently pursuing a <strong className="text-green-900 font-semibold">PhD in Natural Medicine and Functional Health Management</strong>, Dr. Afolabi's journey began with a divine insight that has propelled him forward on a mission to reveal the untapped powers of natural remedies.
+                Every recommendation on this platform is reviewed against the lineage that proved it first — African, Ayurvedic, Chinese, Native American, European, or Unani — and cross-referenced with modern research. If a remedy has weak evidence, we say so. If it has strong evidence, we tell you exactly how to prepare it.
               </p>
+
               <p className="font-body text-gray-700 leading-relaxed" style={{ fontSize: '1.05rem' }}>
-                His belief in the sanctity of the natural world is rooted in a spiritual understanding: that everything provided by God has a purpose, including the plants and herbs that have been used for healing since time immemorial.
+                The platform is free. There is no upsell, no subscription, and no supplements to buy. The work is funded by the practice; the tools exist so the work can scale.
               </p>
             </div>
 
@@ -189,9 +188,9 @@ export default function AboutPage() {
                   { val: '6', label: 'Traditions' },
                   { val: 'Global', label: 'Impact' },
                 ].map(s => (
-                  <div key={s.label} className="rounded-xl p-4 text-center card-resting">
-                    <p className="font-display font-bold text-xl text-green-900">{s.val}</p>
-                    <p className="font-body text-xs text-gray-500 mt-1">{s.label}</p>
+                  <div key={s.label} className="wellness-card card-accent-top p-4 text-center">
+                    <p className="font-display font-bold text-2xl gold-text" style={{ letterSpacing: '-0.01em' }}>{s.val}</p>
+                    <p className="font-body text-[10px] uppercase tracking-[0.16em] mt-1.5 font-semibold" style={{ color: '#7a5a2e' }}>{s.label}</p>
                   </div>
                 ))}
               </div>
@@ -207,9 +206,9 @@ export default function AboutPage() {
           <h2 className="font-display text-title font-bold text-green-900 mb-6">The Mission</h2>
           <p className="font-body text-green-800 leading-relaxed"
             style={{ fontSize: '1.15rem', fontStyle: 'italic' }}>
-            "To democratize access to nature's healing intelligence, empowering every person regardless of geography or background to find safe, effective, and affordable natural solutions for their health challenges."
+            &ldquo;Make safe, evidence-led natural remedies available to anyone, anywhere — without the supplements industry standing in the way.&rdquo;
           </p>
-          <p className="font-body text-green-700 mt-5 font-bold text-sm tracking-wide">— Rev. Dr. Gideon Afolabi</p>
+          <p className="font-body text-green-700 mt-5 font-bold text-sm tracking-wide">— Dr. Gideon Afolabi</p>
         </div>
       </div>
 
@@ -256,19 +255,19 @@ export default function AboutPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {credentials.map(c => (
-              <div key={c.title} className="wellness-card p-6 flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+              <div key={c.title} className="group wellness-card card-accent-top p-6 sm:p-7 flex items-start gap-4 sm:gap-5">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-[-4deg]"
                   style={{
                     background: c.color === '#ffd700'
                       ? 'linear-gradient(135deg, #b87800, #ffd700)'
                       : 'linear-gradient(135deg, #145a2e, #22a050)',
-                    boxShadow: `0 4px 14px ${c.color}40`,
+                    boxShadow: `0 8px 22px ${c.color}40, inset 0 1px 0 rgba(255,255,255,0.25)`,
                   }}>
-                  <c.icon className="w-5 h-5" style={{ color: c.color === '#ffd700' ? '#0a3d1f' : 'white' }} />
+                  <c.icon className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: c.color === '#ffd700' ? '#0a3d1f' : 'white' }} />
                 </div>
-                <div>
-                  <h3 className="font-display text-base font-bold text-green-900 mb-1">{c.title}</h3>
-                  <p className="font-body text-gray-500 text-sm leading-relaxed">{c.desc}</p>
+                <div className="flex-1">
+                  <h3 className="font-display text-base sm:text-[17px] font-bold text-green-900 mb-1.5" style={{ letterSpacing: '-0.01em' }}>{c.title}</h3>
+                  <p className="font-body text-sm leading-relaxed" style={{ color: '#5b6f5f' }}>{c.desc}</p>
                 </div>
               </div>
             ))}

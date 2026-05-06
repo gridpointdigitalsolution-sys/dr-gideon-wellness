@@ -6,6 +6,7 @@ import LoadingBar from '@/components/LoadingBar'
 import PageTransition from '@/components/PageTransition'
 import RegisterSW from '@/components/RegisterSW'
 import PWAInstallBanner from '@/components/PWAInstallBanner'
+import ScrollToTop from '@/components/ScrollToTop'
 
 export const metadata: Metadata = {
   title: 'Dr. Gideon Afolabi Wellness | Natural Remedies & Herbal Solutions',
@@ -52,7 +53,8 @@ export default function RootLayout({
         <meta name="application-name" content="Dr. Gideon Wellness" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
+        <link rel="icon" type="image/jpeg" href="/dr-gideon.jpg" />
+        <link rel="shortcut icon" type="image/jpeg" href="/dr-gideon.jpg" />
         <link rel="canonical" href="https://drGideonAfolabi.com" />
       </head>
       <body>
@@ -66,6 +68,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <PWAInstallBanner />
+        <ScrollToTop />
       </body>
     </html>
   )

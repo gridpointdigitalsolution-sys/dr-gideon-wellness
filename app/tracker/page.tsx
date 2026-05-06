@@ -245,18 +245,24 @@ export default function HealthTrackerPage() {
               <div className="divider-gold" />
               <p className="font-body text-sm mt-3" style={{ color: '#888' }}>Based on your wellness scores</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
               {suggestions.map(s => (
-                <div key={s.condition}
-                  style={{ background: 'white', border: '1px solid rgba(255,215,0,0.2)', borderRadius: 20, padding: '24px', boxShadow: '0 4px 20px rgba(10,61,31,0.07)' }}>
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="w-2 h-2 rounded-full bg-red-500 flex-shrink-0" />
-                    <p className="text-xs text-red-500 uppercase tracking-widest font-body font-semibold">Detected: {s.condition}</p>
-                  </div>
-                  <h3 className="font-display text-lg font-bold text-green-900 mb-4">{s.remedy}</h3>
-                  <div className="rounded-xl p-4" style={{ background: '#f0faf0', border: '1px solid rgba(34,160,80,0.15)' }}>
-                    <p className="text-xs text-green-600 uppercase tracking-widest font-body mb-2">How to use</p>
-                    <p className="text-green-800 text-sm font-body leading-relaxed">{s.tip}</p>
+                <div key={s.condition} className="wellness-card card-accent-top p-6 sm:p-7 relative overflow-hidden">
+                  <div className="absolute -top-16 -right-16 w-44 h-44 rounded-full pointer-events-none"
+                    style={{ background: 'radial-gradient(circle, rgba(239,68,68,0.07), transparent 65%)' }} />
+                  <div className="relative">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="relative flex h-2 w-2 flex-shrink-0">
+                        <span className="absolute inline-flex h-full w-full rounded-full opacity-60 animate-ping bg-red-500" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+                      </span>
+                      <p className="text-[10px] sm:text-xs text-red-600 uppercase tracking-[0.18em] font-body font-bold">Detected · {s.condition}</p>
+                    </div>
+                    <h3 className="font-display text-lg sm:text-xl font-bold text-green-900 mb-4 leading-tight" style={{ letterSpacing: '-0.01em' }}>{s.remedy}</h3>
+                    <div className="rounded-xl p-4" style={{ background: 'linear-gradient(135deg, #f0faf0, #e8f5ec)', border: '1px solid rgba(34,160,80,0.18)' }}>
+                      <p className="text-[10px] text-green-700 uppercase tracking-[0.18em] font-body font-semibold mb-2">How to use</p>
+                      <p className="text-green-900 text-sm font-body leading-relaxed">{s.tip}</p>
+                    </div>
                   </div>
                 </div>
               ))}

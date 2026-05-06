@@ -28,12 +28,13 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full flex items-center justify-center pulse-gold" style={{ background: 'linear-gradient(135deg, #ffd700, #b87800)' }}>
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-full flex items-center justify-center transition-transform group-hover:scale-105"
+              style={{ background: 'linear-gradient(135deg, #ffd700, #b87800)', boxShadow: '0 4px 14px rgba(255,215,0,0.25)' }}>
               <Leaf className="w-5 h-5 text-green-900" />
             </div>
             <div>
-              <p className="text-xs text-green-400 font-body tracking-widest uppercase">Dr. Gideon Afolabi</p>
+              <p className="text-[10px] font-body tracking-[0.22em] uppercase font-semibold" style={{ color: 'rgba(255,215,0,0.6)' }}>Dr. Gideon Afolabi</p>
               <p className="gold-text font-display font-bold text-lg leading-tight">Wellness</p>
             </div>
           </Link>
@@ -74,7 +75,7 @@ export default function Navbar() {
               )
             })}
             <Link href="/checker" className="btn-gold text-sm px-6 py-3 ml-4">
-              Get Diagnosis
+              Symptom Check
             </Link>
           </div>
 
@@ -109,7 +110,7 @@ export default function Navbar() {
             )
           })}
           <Link href="/checker" onClick={() => setOpen(false)} className="btn-gold block text-center mt-4 text-sm">
-            Get Diagnosis
+            Symptom Check
           </Link>
         </div>
       )}

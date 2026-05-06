@@ -211,21 +211,41 @@ export default function SymptomCheckerPage() {
           </div>
         </div>
 
-        {/* Category horizontal scroll */}
+        {/* Category horizontal scroll — with explicit "swipe for more" cue */}
         {!symptomSearch&&(
-          <div className="overflow-x-auto px-3 py-2" style={{scrollbarWidth:'none',WebkitOverflowScrolling:'touch'}}>
-            <div className="flex gap-1.5" style={{minWidth:'max-content'}}>
-              {categories.map(cat=>(
-                <button key={cat} onClick={()=>setActiveCategory(cat)}
-                  className="flex items-center gap-1 px-3 py-1.5 rounded-full font-body font-semibold text-xs whitespace-nowrap transition-all"
-                  style={activeCategory===cat
-                    ?{background:'rgba(255,215,0,0.2)',color:'#ffd700',border:'1px solid rgba(255,215,0,0.4)'}
-                    :{background:'rgba(255,255,255,0.05)',color:'rgba(187,244,210,0.6)',border:'1px solid rgba(255,255,255,0.08)'}
-                  }>
-                  <span>{CAT_ICONS[cat]||'🌿'}</span>
-                  <span>{cat.split(' ')[0]}</span>
-                </button>
-              ))}
+          <div className="relative">
+            {/* Right-edge fade — signals more content off-screen */}
+            <div className="absolute right-0 top-0 bottom-0 w-12 z-10 pointer-events-none"
+              style={{background:'linear-gradient(to left, #0a3d1f 0%, rgba(10,61,31,0.85) 40%, transparent 100%)'}}/>
+            {/* Animated chevron pulses near the fade */}
+            <div className="absolute right-1.5 top-1/2 -translate-y-1/2 z-20 pointer-events-none flex items-center gap-0.5"
+              style={{animation:'swipeHintPulse 1.6s ease-in-out infinite'}}>
+              <ChevronRight className="w-3.5 h-3.5" style={{color:'#ffd700'}}/>
+              <ChevronRight className="w-3 h-3 -ml-2" style={{color:'rgba(255,215,0,0.6)'}}/>
+            </div>
+
+            <div className="overflow-x-auto px-3 py-2 pr-12" style={{scrollbarWidth:'none',WebkitOverflowScrolling:'touch'}}>
+              <div className="flex gap-1.5" style={{minWidth:'max-content'}}>
+                {categories.map(cat=>(
+                  <button key={cat} onClick={()=>setActiveCategory(cat)}
+                    className="flex items-center gap-1 px-3 py-1.5 rounded-full font-body font-semibold text-xs whitespace-nowrap transition-all"
+                    style={activeCategory===cat
+                      ?{background:'rgba(255,215,0,0.2)',color:'#ffd700',border:'1px solid rgba(255,215,0,0.4)'}
+                      :{background:'rgba(255,255,255,0.05)',color:'rgba(187,244,210,0.6)',border:'1px solid rgba(255,255,255,0.08)'}
+                    }>
+                    <span>{CAT_ICONS[cat]||'🌿'}</span>
+                    <span>{cat.split(' ')[0]}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Explicit swipe hint label below */}
+            <div className="px-4 pt-0 pb-1 flex items-center gap-1.5">
+              <span className="text-[10px] font-body uppercase tracking-[0.18em] font-bold" style={{color:'#ffd700'}}>
+                Swipe for more categories
+              </span>
+              <ChevronRight className="w-3 h-3" style={{color:'#ffd700'}}/>
             </div>
           </div>
         )}
@@ -276,9 +296,9 @@ export default function SymptomCheckerPage() {
               Analyse {selectedSymptoms.length} symptom{selectedSymptoms.length>1?'s':''}
             </button>
           ):(
-            <div className="w-full flex items-center justify-center gap-2 rounded-xl font-body text-xs py-3"
-              style={{background:'rgba(255,255,255,0.04)',color:'rgba(187,244,210,0.3)',border:'1px solid rgba(255,255,255,0.06)'}}>
-              <Leaf className="w-3.5 h-3.5"/>
+            <div className="w-full flex items-center justify-center gap-2 rounded-xl font-body font-semibold text-sm py-3"
+              style={{background:'rgba(255,215,0,0.10)',color:'#ffd700',border:'1px solid rgba(255,215,0,0.32)'}}>
+              <Leaf className="w-4 h-4"/>
               Tap a symptom above to begin
             </div>
           )}
@@ -467,15 +487,15 @@ export default function SymptomCheckerPage() {
                   <span>Analyse {selectedSymptoms.length}</span>
                 </button>
               ):(
-                <div className="w-full flex items-center justify-center gap-1 rounded-xl font-body"
+                <div className="w-full flex items-center justify-center gap-1.5 rounded-xl font-body font-semibold"
                   style={{
                     padding:'11px 8px',
-                    fontSize:12,
-                    background:'rgba(255,255,255,0.04)',
-                    color:'rgba(187,244,210,0.3)',
-                    border:'1px solid rgba(255,255,255,0.06)'
+                    fontSize:13,
+                    background:'rgba(255,215,0,0.10)',
+                    color:'#ffd700',
+                    border:'1px solid rgba(255,215,0,0.32)'
                   }}>
-                  <Leaf className="w-3 h-3"/>
+                  <Leaf className="w-3.5 h-3.5"/>
                   <span>Pick a symptom</span>
                 </div>
               )}

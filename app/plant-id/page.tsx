@@ -358,48 +358,56 @@ export default function PlantIdentifierPage() {
                     </div>
                   )}
 
-                  {/* Plant Profile — Zolve-style metric grid */}
-                  <div className="rounded-2xl p-5"
-                    style={{ background: 'white', border: '1px solid rgba(255,215,0,0.2)', boxShadow: '0 4px 20px rgba(10,61,31,0.06)' }}>
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-display text-base font-bold text-green-900">Plant Profile</h3>
+                  {/* Plant Profile — premium metric grid */}
+                  <div className="wellness-card card-accent-top p-5 sm:p-6">
+                    <div className="flex items-center justify-between mb-5">
+                      <h3 className="font-display text-base sm:text-lg font-bold text-green-900" style={{ letterSpacing: '-0.01em' }}>Plant Profile</h3>
                       <span className="text-xs font-body px-2.5 py-1 rounded-full flex items-center gap-1.5"
-                        style={{ background: 'rgba(34,160,80,0.1)', color: '#22a050', border: '1px solid rgba(34,160,80,0.2)' }}>
+                        style={{ background: 'rgba(34,160,80,0.1)', color: '#22a050', border: '1px solid rgba(34,160,80,0.22)' }}>
                         <CheckCircle className="w-3 h-3" /> Identified
                       </span>
                     </div>
-                    <div className="grid grid-cols-2 gap-3 mb-4">
+                    <div className="grid grid-cols-2 gap-2.5 sm:gap-3 mb-4">
                       {[
                         { icon: Leaf, label: 'Common Name', value: result.name, color: '#22a050' },
                         { icon: FlaskConical, label: 'Scientific Name', value: result.scientific_name || 'N/A', color: '#818cf8' },
                         { icon: Droplets, label: 'Plant Family', value: result.family || 'Unknown', color: '#38bdf8' },
                         { icon: Shield, label: 'Safety Status', value: result.is_toxic ? 'Toxic ⚠️' : 'Safe to study', color: result.is_toxic ? '#ef4444' : '#22a050' },
                       ].map(item => (
-                        <div key={item.label} className="rounded-xl p-3"
-                          style={{ background: item.color + '0D', border: `1px solid ${item.color}25` }}>
+                        <div key={item.label} className="rounded-xl p-3 transition-all hover:scale-[1.02]"
+                          style={{
+                            background: `linear-gradient(140deg, ${item.color}10 0%, ${item.color}05 100%)`,
+                            border: `1px solid ${item.color}28`,
+                            boxShadow: `0 2px 8px ${item.color}10`,
+                          }}>
                           <div className="flex items-center gap-1.5 mb-1.5">
-                            <item.icon className="w-3.5 h-3.5" style={{ color: item.color }} />
-                            <span className="text-xs font-body uppercase tracking-wider" style={{ color: item.color, opacity: 0.8 }}>{item.label}</span>
+                            <div className="w-6 h-6 rounded-md flex items-center justify-center"
+                              style={{ background: item.color + '22', border: `1px solid ${item.color}40` }}>
+                              <item.icon className="w-3 h-3" style={{ color: item.color }} />
+                            </div>
+                            <span className="text-[10px] font-body uppercase tracking-[0.16em] font-semibold" style={{ color: item.color }}>{item.label}</span>
                           </div>
                           <p className="font-body font-semibold text-green-900 text-sm leading-tight line-clamp-1">{item.value}</p>
                         </div>
                       ))}
                     </div>
-                    <p className="font-body text-gray-500 text-sm leading-relaxed pt-3 border-t" style={{ borderColor: 'rgba(34,160,80,0.1)' }}>
+                    <p className="font-body text-sm leading-relaxed pt-3 border-t" style={{ color: '#5b6f5f', borderColor: 'rgba(34,160,80,0.1)' }}>
                       {result.description}
                     </p>
                   </div>
 
                   {/* Medicinal Uses */}
-                  <div className="rounded-2xl p-5"
-                    style={{ background: 'white', border: '1px solid rgba(255,215,0,0.2)', boxShadow: '0 4px 20px rgba(10,61,31,0.06)' }}>
-                    <h3 className="font-display text-base font-bold text-green-900 mb-4">Medicinal Uses</h3>
-                    <div className="grid grid-cols-2 gap-2">
+                  <div className="wellness-card card-accent-top p-5 sm:p-6">
+                    <h3 className="font-display text-base sm:text-lg font-bold text-green-900 mb-4" style={{ letterSpacing: '-0.01em' }}>Medicinal Uses</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
                       {result.medicinal_uses.map((use, i) => (
-                        <div key={use} className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 transition-all hover:scale-105"
-                          style={{ background: i % 2 === 0 ? 'rgba(34,160,80,0.06)' : 'rgba(255,215,0,0.06)', border: `1px solid ${i % 2 === 0 ? 'rgba(34,160,80,0.15)' : 'rgba(255,215,0,0.2)'}` }}>
-                          <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: i % 2 === 0 ? '#22a050' : '#ffd700' }} />
-                          <p className="text-sm font-body text-green-900">{use}</p>
+                        <div key={use} className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 transition-all hover:scale-[1.02]"
+                          style={{
+                            background: i % 2 === 0 ? 'linear-gradient(140deg, rgba(34,160,80,0.10), rgba(34,160,80,0.04))' : 'linear-gradient(140deg, rgba(255,215,0,0.10), rgba(255,215,0,0.04))',
+                            border: `1px solid ${i % 2 === 0 ? 'rgba(34,160,80,0.20)' : 'rgba(255,215,0,0.25)'}`,
+                          }}>
+                          <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: i % 2 === 0 ? '#22a050' : '#d4a000', boxShadow: `0 0 8px ${i % 2 === 0 ? 'rgba(34,160,80,0.6)' : 'rgba(255,215,0,0.5)'}` }} />
+                          <p className="text-sm font-body text-green-900 font-medium">{use}</p>
                         </div>
                       ))}
                     </div>
@@ -437,21 +445,24 @@ export default function PlantIdentifierPage() {
         {!image && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-8">
             {[
-              { icon: Camera, title: 'Best Photo Tips', tips: ['Focus on a single leaf or flower', 'Use good natural lighting', 'Avoid blurry or dark photos'] },
-              { icon: Leaf, title: 'What We Identify', tips: ['500,000+ plant species', 'Herbs, flowers, trees and shrubs', 'Medicinal and toxic plants'] },
-              { icon: Shield, title: 'Safety First', tips: ['Always verify with a herbalist', 'Never consume unknown plants', 'Check for toxicity warnings'] },
+              { icon: Camera, title: 'Best Photo Tips', accent: '#22a050', tips: ['Focus on a single leaf or flower', 'Use good natural lighting', 'Avoid blurry or dark photos'] },
+              { icon: Leaf, title: 'What We Identify', accent: '#ffd700', tips: ['500,000+ plant species', 'Herbs, flowers, trees and shrubs', 'Medicinal and toxic plants'] },
+              { icon: Shield, title: 'Safety First', accent: '#22a050', tips: ['Always verify with a herbalist', 'Never consume unknown plants', 'Check for toxicity warnings'] },
             ].map(card => (
-              <div key={card.title} className="rounded-2xl p-6"
-                style={{ background: 'white', border: '1px solid rgba(255,215,0,0.18)', boxShadow: '0 4px 16px rgba(10,61,31,0.06)' }}>
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
-                  style={{ background: 'linear-gradient(135deg, #145a2e, #22a050)' }}>
-                  <card.icon className="w-5 h-5 text-white" />
+              <div key={card.title} className="group wellness-card card-accent-top p-6 sm:p-7">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-[-4deg]"
+                  style={{
+                    background: card.accent === '#ffd700' ? 'linear-gradient(135deg, #b87800, #ffd700)' : 'linear-gradient(135deg, #145a2e, #22a050)',
+                    boxShadow: `0 8px 22px ${card.accent}40, inset 0 1px 0 rgba(255,255,255,0.25)`,
+                  }}>
+                  <card.icon className="w-5 h-5" style={{ color: card.accent === '#ffd700' ? '#0a3d1f' : 'white' }} />
                 </div>
-                <h4 className="font-display font-bold text-green-900 mb-3">{card.title}</h4>
-                <ul className="space-y-1.5">
+                <h4 className="font-display text-base sm:text-lg font-bold text-green-900 mb-3" style={{ letterSpacing: '-0.01em' }}>{card.title}</h4>
+                <ul className="space-y-2">
                   {card.tips.map(t => (
-                    <li key={t} className="flex items-start gap-2 text-sm font-body text-gray-500">
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-400 mt-1.5 flex-shrink-0" />{t}
+                    <li key={t} className="flex items-start gap-2 text-sm font-body" style={{ color: '#5b6f5f' }}>
+                      <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ background: card.accent === '#ffd700' ? '#d4a000' : '#22a050' }} />
+                      {t}
                     </li>
                   ))}
                 </ul>

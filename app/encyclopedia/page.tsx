@@ -280,16 +280,19 @@ export default function EncyclopediaPage() {
 
         {/* Results grid */}
         {paginated.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
             {paginated.map(remedy => <RemedyCard key={remedy.id} remedy={remedy} />)}
           </div>
         ) : (
-          <div className="text-center py-24 rounded-2xl"
-            style={{ background: 'white', border: '1px solid rgba(255,215,0,0.15)' }}>
-            <BookOpen className="w-14 h-14 mx-auto mb-4" style={{ color: 'rgba(34,160,80,0.3)' }} />
-            <p className="font-display text-xl text-gray-400 mb-4">No remedies found for your search.</p>
+          <div className="wellness-card text-center py-16 sm:py-24 px-6">
+            <div className="w-16 h-16 rounded-2xl mx-auto flex items-center justify-center mb-4"
+              style={{ background: 'linear-gradient(135deg, rgba(255,215,0,0.12), rgba(34,160,80,0.08))', border: '1px solid rgba(255,215,0,0.22)' }}>
+              <BookOpen className="w-7 h-7" style={{ color: '#b87800' }} />
+            </div>
+            <p className="font-display text-lg sm:text-xl text-green-900 mb-2 font-bold">No remedies match those filters</p>
+            <p className="font-body text-sm mb-6" style={{ color: '#7a8a7e' }}>Try widening your search, or clear filters to see everything.</p>
             <button onClick={clearAll} className="btn-gold text-sm">
-              Clear Filters
+              Clear all filters
             </button>
           </div>
         )}
